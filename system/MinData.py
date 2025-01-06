@@ -38,7 +38,7 @@ def jsontickBar(file):
 
 def tickBar(file):
     fp = open('d:\\pyData\\' + file, 'r')
-    symbol = file[3:9].split('.')[0]
+    symbol = file.split('.')[0]
     path = 'd:\\Data\\tickBar\\' + symbol + '\\'
     isExists = os.path.exists(path)
     if not isExists:
@@ -49,28 +49,30 @@ def tickBar(file):
     list=[]
     pa=''
     for str in fp.readlines():
-        if '/' in str:
-            # print(str.split('\t')[7])
-            list =str.split('\t')
-            # print(list)
-            date2 = date
-            date = list[0].replace('/', '')
-            list.pop(0)
+        # if '/' in str:
+        # print(str.split('\t')[7])
+        list =str.split('\t')
+        # print(list)
+        date2 = date
+        date = list[0].replace('/', '')
+        list.pop(0)
 
-            if date2=='':
-                data=data+'\t'.join(list)
-            elif date2 != '' and date2 == date:
-                data = data + '\t'.join(list)
-            elif date2 != '':
-                pa = 'd:\\Data\\tickBar\\' + symbol + '\\' + date2.replace('/', '') + '.txt'
-                isExists = os.path.exists(pa)
-                if isExists:
-                    continue
-                print(pa)
-                f = open(pa, 'w')
-                f.write(data)
-                f.close()
-                data='\t'.join(list)
+        if date2=='':
+            data=data+'\t'.join(list)
+        elif date2 != '' and date2 == date:
+            data = data + '\t'.join(list)
+        elif date2 != '':
+            pa = 'd:\\Data\\tickBar\\' + symbol + '\\' + date2.replace('/', '') + '.txt'
+            isExists = os.path.exists(pa)
+            if isExists:
+                data=''
+                continue
+            #print(pa)
+            f = open(pa, 'w')
+            f.write(data)
+            f.close()
+            print(pa+'\t写入完成')
+            data='\t'.join(list)
     if date2!='':
         pa = 'd:\\Data\\tickBar\\' + symbol + '\\' + date2.replace('/', '') + '.txt'
         isExists = os.path.exists(pa)
@@ -85,7 +87,8 @@ def eachFile(filepath):
     stocks = []
     for allDir in pathDir:
         stocks.append(allDir)
-    pool = Pool(50)  # 可以同时跑50个进程
+
+    pool = Pool(20)  # 可以同时跑20个进程
     pool.map(tickBar, stocks)
     pool.close()
     pool.join()
