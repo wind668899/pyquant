@@ -72,5 +72,6 @@
 #     print()
 # for i in range(1,9):
 #     print(i)
-
-print(type(round(1.999999,0)))
+for i in range(2, 10):
+    print(i)
+# print(type(round(1.999999,0)))
