@@ -75,3 +75,8 @@
 for i in range(2, 10):
     print(i)
 # print(type(round(1.999999,0)))
+
+
+a=[1, 2, 3, 4, 5]
+a.pop(0)
+print(a)

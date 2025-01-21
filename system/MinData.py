@@ -65,7 +65,7 @@ def tickBar(file):
             pa = 'd:\\Data\\tickBar\\' + symbol + '\\' + date2.replace('/', '') + '.txt'
             isExists = os.path.exists(pa)
             if isExists:
-                data=''
+                data = '\t'.join(list)
                 continue
             #print(pa)
             f = open(pa, 'w')
