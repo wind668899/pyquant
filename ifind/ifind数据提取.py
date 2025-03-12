@@ -1,5 +1,5 @@
-f=open("C:\\Users\\wind\\Desktop\\期权\\2.txt","r",encoding='UTF-8')
-f2=open("C:\\Users\\wind\\Desktop\\期权\\result.txt","w",encoding='UTF-8')
+f=open("C:\\Users\\wind\\Desktop\\py\\2.txt","r",encoding='UTF-8')
+f2=open("C:\\Users\\wind\\Desktop\\py\\result.txt","w",encoding='UTF-8')
 data={}
 k=f.readline().replace("\n", "").replace(".SH","").split('\t')
 f

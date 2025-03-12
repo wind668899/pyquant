@@ -139,7 +139,7 @@ def updateDataD(symbol):
     stockLastDataD = getLastDataD(
         'SELECT date,close FROM DataD where symbol="' + symbol + '" order by date desc limit 1')
     print(LastDate)
-    print(stockLastDataD[0])
+    #print(stockLastDataD[0])
     if stockLastDataD is None:
         dataD = ts.get_h_data(symbol)
     elif stockLastDataD[0] > LastDate:
@@ -204,13 +204,13 @@ def updateTDXDataD(symbol):
         elif symbol.find('I') != -1:
             file = 'D:/new_tdx/vipdoc/ds/lday/47#' + symbol + '.day'
             df = reader1.get_df(file)
-        elif symbol[0] == '6' or symbol[0] == '5' or symbol[0] == '9':
+        elif symbol[0] == '6' or symbol[0] == '5' or symbol[0:2] == '99':
             file = 'D:/new_tdx/vipdoc/sh/lday/sh' + symbol + '.day'
             df = reader2.get_df(file)
         elif symbol[0] == '0' or symbol[0] == '3':
             file = 'D:/new_tdx/vipdoc/sz/lday/sz' + symbol + '.day'
             df = reader2.get_df(file)
-        elif symbol[0] == '8' or symbol[0] == '9' or symbol[0] == '4':
+        elif symbol[0] == '8' or symbol[0:2] == '92' or symbol[0] == '4':
             file = 'D:/new_tdx/vipdoc/bj/lday/bj' + symbol + '.day'
             print("AAA"+file)
             df = reader2.get_df(file)
@@ -359,7 +359,7 @@ def main():
     #stocks = list(ts.get_stock_basics().index)
     stocks=[]
     # print(stocks)
-    # updateDataD('300222')
+    #updateTDXDataD('920099')
     stockMessages = getSymbols('SELECT symbol FROM stockmessage')
     for i in stockMessages:
         #print(i)
@@ -369,7 +369,7 @@ def main():
     pool.map(updateTDXDataD, stocks)
     pool.close()
     pool.join()
-    #print(stocks)
+    print(stocks)
 
     # tdxData.updataData('stocks2')
     #updateTDXDataD('300223')
